@@ -25,7 +25,9 @@ SECRET_KEY = 'y7jif@se5ct5q%p3(+i&r*=3$k-#uz2+1u*r5j&rvxcw2ouewh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'twitterclone'
 ]
 
 MIDDLEWARE = [
@@ -118,3 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
