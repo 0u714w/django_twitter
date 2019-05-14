@@ -1,8 +1,12 @@
 from twitterclone.authentication.forms import LoginForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
+from twitterclone.tweet.models import Tweet
+from twitterclone.twitteruser.models import TwitterUser
+from django.contrib.auth.decorators import login_required
 
+
+@login_required()
 def index_login(request):
 
     html = 'index.html'
@@ -20,10 +24,17 @@ def index_login(request):
     form = LoginForm()
     return render(request, html, {'form': form})
 
+@login_required()
 def homepage(request):
 
     html = 'homepage.html'
-    user_info = User
+    tweets = Tweet.objects.all()
+    return render(request, html, {'tweets': tweets})
 
-    return render(request, html, {'user_info': user_info})
+def user_page(request, username):
+    html = 'user.html'
+    user = TwitterUser.objects.filter(username=username).first()
+
+
+    return render(request, html, {"user": user})
 

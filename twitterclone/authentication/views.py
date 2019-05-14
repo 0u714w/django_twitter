@@ -2,6 +2,7 @@ from twitterclone.authentication.forms import LoginForm, SignUpForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from twitterclone.twitteruser.models import TwitterUser
 from django.contrib import messages
 
 def dj_login(request):
@@ -31,6 +32,7 @@ def create_user(request):
             data = form.cleaned_data
             new_user = User.objects.create_user(data['username'], data['email'], data['password'])
             new_user.save()
+            TwitterUser.objects.create(user=new_user, username=data['username'])
             login(request, new_user)
             render(request, 'signup.html')
             if next:

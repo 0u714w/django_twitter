@@ -1,0 +1,11 @@
+
+{% for tweet in tweets %}
+    <h1>Tweet by {{ tweet.userprofile.username }}</h1>
+<div id="tweet_card">
+    <p>username: {{ tweet.userprofile.username }}</p>
+    <p>{{ tweet.datetime }}</p>
+        <p>{{ tweet.body }}</p>
+    </div>
+{% endfor %}
+
+<a href="/">Home</a>
