@@ -4,6 +4,7 @@
 
 {% if request.user.is_active%}
     <h2>What's happening, <a href="/user/{{ user.username }}">{{ user.username }}?</a></h2>
+
     <h2><a href="/tweet">Submit a Tweet</a></h2>
 {% for tweet in tweets %}
     <div id="tweet_card">
@@ -12,7 +13,7 @@
         <p><a href="/tweet/{{ tweet.id }}">{{ tweet.body }}</a></p>
     </div>
 {% endfor %}
-
+<h1><a href="/user_list">Find new followers</a></h1>
 
 <h2><a href="/logout">logout</a></h2>
 {% endif %}

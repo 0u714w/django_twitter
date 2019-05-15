@@ -1,0 +1,6 @@
+<h1>Follow someone new!</h1>
+{% for user in users %}
+    <li>
+<a href="/user/{{ user.username }}">{{ user.username }}</a>
+    </li>
+{% endfor %}

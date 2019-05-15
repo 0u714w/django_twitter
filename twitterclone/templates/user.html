@@ -10,5 +10,30 @@
         <p><a href="/tweet/{{ tweet.id }}">{{ tweet.body }}</a></p>
     </div>
 {% endfor %}
+{% if not is_self %}
+                {% if already_following %}
+                <form name="unfollow" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="rule" value="unfollow" />
+                    <input type="hidden" name="id" value="{{ user.id }}" />
+                    <input class="btn btn-secondary" type="submit" value="Unfollow" />
+                </form>
+                {% else %}
+                <form name="follow" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="rule" value="follow" />
+                    <input type="hidden" name="id" value="{{ user.id }}" />
+                    <input class="btn btn-secondary" type="submit" value="Follow" />
+                </form>
+                {% endif %}
+                {% endif %}
 <br>
+{#<div class="card-body">#}
+{#                        Following#}
+{#                        <br>#}
+{#                        {% for user in following %}#}
+{#                        <a href="/user/{{ user.id }}">{{ user }}</a>#}
+{#                        <br>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
 <a href="/">Home</a>

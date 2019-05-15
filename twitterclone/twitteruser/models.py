@@ -8,3 +8,5 @@ class TwitterUser(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     following = models.ManyToManyField('self', symmetrical=False, blank=True)
+
+
