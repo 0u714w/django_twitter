@@ -1,3 +1,14 @@
-<h1>Hello, {{ user.username }}</h1>
+{% load static from staticfiles %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<h1>{{ user.username }}'s profile</h1>
+<p>{{ user.username }} is following {{ following }} others</p>
+<p>Number of posts: {{ tweet_count }}</p>
+{% for tweet in tweets %}
+    <div id="tweet_card">
 
+    <p>{{ tweet.datetime }}</p>
+        <p><a href="/tweet/{{ tweet.id }}">{{ tweet.body }}</a></p>
+    </div>
+{% endfor %}
+<br>
 <a href="/">Home</a>

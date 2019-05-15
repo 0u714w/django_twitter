@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 from django.contrib.auth.decorators import login_required
+from twitterclone.tweet.views import find_following_tweets
 
 
 @login_required()
@@ -34,7 +35,13 @@ def homepage(request):
 def user_page(request, username):
     html = 'user.html'
     user = TwitterUser.objects.filter(username=username).first()
+    tweets = Tweet.objects.filter(userprofile=user)
+    print(tweets)
+    following = request.user.twitteruser.following.all()
 
 
-    return render(request, html, {"user": user})
+    return render(request, html, {"user": user, "following": len(following), "tweets": tweets, "tweet_count": len(tweets)})
+
+
+
 
