@@ -20,9 +20,12 @@ from twitterclone.twitteruser.views import index_login, homepage, user_page, use
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 from twitterclone.tweet.views import tweet_view, tweetid
+from twitterclone.notification.models import Notification
+from twitterclone.notification.views import notification
 
 admin.site.register(Tweet)
 admin.site.register(TwitterUser)
+admin.site.register(Notification)
 
 
 urlpatterns = [
@@ -34,5 +37,6 @@ urlpatterns = [
     path('tweet/', tweet_view),
     path('user/<username>', user_page),
     path('tweet/<int:id>', tweetid),
-    path('user_list/', user_list)
+    path('user_list/', user_list),
+    path('notification/', notification)
 ]

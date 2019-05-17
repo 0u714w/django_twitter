@@ -1,6 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+
 <h1>Follow someone new!</h1>
+<h3>Active Users:</h3>
 {% for user in users %}
     <li>
 <a href="/user/{{ user.username }}">{{ user.username }}</a>
     </li>
 {% endfor %}
+<br>
+<a href="/">Home</a>

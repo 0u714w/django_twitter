@@ -1,7 +1,12 @@
-{% load static from staticfiles %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
 <h1>{{ user.username }}'s profile</h1>
-<p>{{ user.username }} is following {{ following }} others</p>
+<p>{{ user.username }} is following {{ following }} others:</p>
+{% for follow in followers %}
+    <li>
+        <a href="/user/{{ follow.username }}">{{ follow.username }}</a>
+    </li>
+{% endfor %}
 <p>Number of posts: {{ tweet_count }}</p>
 {% for tweet in tweets %}
     <div id="tweet_card">
@@ -16,24 +21,17 @@
                     {% csrf_token %}
                     <input type="hidden" name="rule" value="unfollow" />
                     <input type="hidden" name="id" value="{{ user.id }}" />
-                    <input class="btn btn-secondary" type="submit" value="Unfollow" />
+                    <input type="submit" value="Unfollow" />
                 </form>
                 {% else %}
                 <form name="follow" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="rule" value="follow" />
                     <input type="hidden" name="id" value="{{ user.id }}" />
-                    <input class="btn btn-secondary" type="submit" value="Follow" />
+                    <input type="submit" value="Follow" />
                 </form>
                 {% endif %}
                 {% endif %}
 <br>
-{#<div class="card-body">#}
-{#                        Following#}
-{#                        <br>#}
-{#                        {% for user in following %}#}
-{#                        <a href="/user/{{ user.id }}">{{ user }}</a>#}
-{#                        <br>#}
-{#                        {% endfor %}#}
-{#                    </div>#}
+
 <a href="/">Home</a>

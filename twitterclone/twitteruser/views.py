@@ -6,6 +6,7 @@ from twitterclone.twitteruser.models import TwitterUser
 from django.contrib.auth.decorators import login_required
 
 
+
 @login_required()
 def index_login(request):
 
@@ -30,7 +31,6 @@ def homepage(request):
     users = list(request.user.twitteruser.following.all())
     current_user = request.user.twitteruser
     users.append(current_user)
-
     html = 'homepage.html'
     posts_followers = Tweet.objects.filter(
         userprofile__in=users)
@@ -66,7 +66,7 @@ def user_page(request, username):
 
 
 
-    return render(request, html, {"user": user, "following": len(following), "tweets": tweets, "tweet_count": len(tweets), "already_following": True if user in current_user_follows else False, "is_self": True if user.user == request.user else False})
+    return render(request, html, {"followers": following, "user": user, "following": len(following), "tweets": tweets, "tweet_count": len(tweets), "already_following": True if user in current_user_follows else False, "is_self": True if user.user == request.user else False})
 
 
 

@@ -1,4 +1,8 @@
-<h1>Login</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<h1 id="welcome">Welcome to Twitter! Powered by</h1>
+<img src={% static "django.png" %} id="django">
+<h2>Login</h2>
 <form action="" method="post" >
     {% csrf_token %}
     {{ form.as_p }}
@@ -6,6 +10,6 @@
 </form>
 
 <br>
-<h2>Not signed up?<a href="/signup">Register here</a></h2>
+<h2>Not signed up? <a href="/signup">Register here</a></h2>
 
 <a href="/">Home</a>

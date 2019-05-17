@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<h1>Notifications</h1>
+{% if tweets%}
+    <h3>You have {{ notification }} new notifications</h3>
+    {% for tweet in tweets %}
+    <div id="tweet_card">
+    <p><a href="/user/{{ tweet.userprofile.username }}">{{ tweet.userprofile.username }}</a></p>
+    <p>{{ tweet.datetime }}</p>
+        <p><a href="/tweet/{{ tweet.id }}">{{ tweet.body }}</a></p>
+    </div>
+{% endfor %} {%else%}
+<h3>Nothing here</h3>
+{% endif %}
+<br>
+<a href="/">Home</a>
