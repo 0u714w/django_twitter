@@ -43,7 +43,7 @@ def user_list(request):
     users = TwitterUser.objects.all()
     return render(request, html, {'users': users})
 
-
+@login_required()
 def user_page(request, username):
     html = 'user.html'
     user = TwitterUser.objects.filter(username=username).first()
