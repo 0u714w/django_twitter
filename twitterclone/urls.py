@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from twitterclone.authentication.views import dj_login, create_user, dj_logout
-from twitterclone.twitteruser.views import index_login, homepage, user_page, user_list
+from twitterclone.twitteruser.views import homepage, user_page, user_list
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 from twitterclone.tweet.views import tweet_view, tweetid

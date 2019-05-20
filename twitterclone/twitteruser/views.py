@@ -1,5 +1,5 @@
 from twitterclone.authentication.forms import LoginForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect, render
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser

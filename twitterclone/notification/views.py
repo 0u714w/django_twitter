@@ -1,8 +1,8 @@
-from django.shortcuts import redirect
 from twitterclone.twitteruser.models import TwitterUser
 from django.shortcuts import redirect, render
 from twitterclone.notification.models import Notification
 import re
+
 
 def notification(request):
     html = 'notification.html'
@@ -18,6 +18,7 @@ def notification(request):
             tweets += [notice.tweet]
             Notification.objects.filter(pk=notice.pk).update(seen=True)
     return render(request, html, {'tweets': tweets, 'notification': new_notification})
+
 
 def check_for_mentions(tweet):
     notifications = re.findall(r"(@\w+)", tweet.body)

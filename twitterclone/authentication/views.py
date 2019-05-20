@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from twitterclone.twitteruser.models import TwitterUser
 from django.contrib import messages
 
+
 def dj_login(request):
     global form
     if request.method == 'POST':
@@ -22,6 +23,7 @@ def dj_login(request):
                 return redirect('/')
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
 
 def create_user(request):
     global form
@@ -43,6 +45,7 @@ def create_user(request):
         form = SignUpForm()
 
     return render(request, 'signup.html', {'form': form})
+
 
 def dj_logout(request):
     logout(request)
