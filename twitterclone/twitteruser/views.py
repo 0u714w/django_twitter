@@ -36,7 +36,14 @@ def homepage(request):
         userprofile__in=users)
     posts = Tweet.objects.filter(userprofile__id=request.user.id)
     tweets = posts.union(posts_followers).order_by('datetime').reverse()
-    return render(request, html, {'tweets': tweets})
+    found_notifications = request.user.twitteruser.notification_set
+    new_notification = 0
+    for notice in found_notifications.get_queryset().all():
+        if not notice.seen:
+            new_notification += 1
+
+    print(new_notification)
+    return render(request, html, {'tweets': tweets, 'notification': new_notification})
 
 def user_list(request):
     html = 'user_list.html'

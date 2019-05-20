@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from twitterclone.tweet.models import Tweet
 from twitterclone.tweet.forms import TweetForm
 from twitterclone.notification.views import check_for_mentions
-from operator import attrgetter
 
 def tweet_view(request):
     if request.method == 'POST':

@@ -7,8 +7,6 @@
 body {
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-image: url("https://media3.giphy.com/media/MNa0HKdhc3SGQ/giphy.gif");
-    background-repeat: no-repeat;
 }
 
 #tweet_button {
@@ -45,4 +43,5 @@ body {
 
 #welcome {
     display: inline-block;
+    margin-top: 20px;
 }
