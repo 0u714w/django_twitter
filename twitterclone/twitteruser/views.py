@@ -45,20 +45,24 @@ def homepage(request):
     print(new_notification)
     return render(request, html, {'tweets': tweets, 'notification': new_notification})
 
+
 def user_list(request):
     html = 'user_list.html'
     users = TwitterUser.objects.all()
     return render(request, html, {'users': users})
 
-@login_required()
+
 def user_page(request, username):
     html = 'user.html'
+    current_user_follows = None
+    if current_user_follows == None:
+        current_user_follows = []
     user = TwitterUser.objects.filter(username=username).first()
     tweets = Tweet.objects.filter(userprofile=user)
     following = user.following.all()
-    current_user_follows = TwitterUser.objects.filter(
-        user=request.user).first().following.all()
-
+    if request.user.is_active:
+        current_user_follows = TwitterUser.objects.filter(
+            user=request.user).first().following.all()
 
     if request.method == "POST":
         rule = request.POST.get('rule')
@@ -70,8 +74,6 @@ def user_page(request, username):
         elif rule == "unfollow":
             current_user.following.remove(user.id)
         return redirect('/user/' + user.username)
-
-
 
     return render(request, html, {"followers": following, "user": user, "following": len(following), "tweets": tweets, "tweet_count": len(tweets), "already_following": True if user in current_user_follows else False, "is_self": True if user.user == request.user else False})
 
