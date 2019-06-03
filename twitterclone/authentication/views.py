@@ -4,11 +4,16 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from twitterclone.twitteruser.models import TwitterUser
 from django.contrib import messages
+from django.views import View
 
 
-def dj_login(request):
-    global form
-    if request.method == 'POST':
+class Login(View):
+    form_class = LoginForm
+    def get(self, request):
+        form = self.form_class()
+        return render(request, 'login.html', {'form': form})
+
+    def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
             next = request.GET.get('next', '/')
@@ -21,8 +26,9 @@ def dj_login(request):
                 return redirect(next)
             else:
                 return redirect('/')
-    form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+
 
 
 def create_user(request):
@@ -47,7 +53,11 @@ def create_user(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def dj_logout(request):
-    logout(request)
-    messages.info(request, 'You have successfully logged out')
-    return redirect('/')
+
+class Logout(View):
+
+    def get(self, request):
+        logout(request)
+        messages.info(request, 'You have successfully logged out')
+        return redirect('/')
+

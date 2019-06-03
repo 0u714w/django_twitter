@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from twitterclone.tweet.models import Tweet
 from twitterclone.tweet.forms import TweetForm
 from twitterclone.notification.views import check_for_mentions
+from django.views import View
 
 
 def tweet_view(request):
@@ -22,8 +23,12 @@ def tweet_view(request):
     return render(request, 'submittweet.html', {'form': form})
 
 
-def tweetid(request, id):
-    html = 'tweet.html'
-    tweets = Tweet.objects.filter(pk=id)
-    return render(request, html, {'tweets': tweets})
+
+class TweetId(View):
+
+    def get(self, request, id):
+        html = 'tweet.html'
+        tweets = Tweet.objects.filter(pk=id)
+        return render(request, html, {'tweets': tweets})
+
 

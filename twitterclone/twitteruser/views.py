@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 from django.contrib.auth.decorators import login_required
+from django.views import View
 
 
 
@@ -46,10 +47,11 @@ def homepage(request):
     return render(request, html, {'tweets': tweets, 'notification': new_notification})
 
 
-def user_list(request):
-    html = 'user_list.html'
-    users = TwitterUser.objects.all()
-    return render(request, html, {'users': users})
+class User_list(View):
+    def get(self, request):
+        html = 'user_list.html'
+        users = TwitterUser.objects.all()
+        return render(request, html, {'users': users})
 
 
 def user_page(request, username):
